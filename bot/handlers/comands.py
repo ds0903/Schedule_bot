@@ -1,13 +1,10 @@
 import asyncio
 
-from aiogram import F, Router, html, types
+from aiogram import Router, types
 from aiogram.filters.command import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
-# from aiogram.fsm.context import FSMContext
-# from aiogram.fsm.state import State, StatesGroup
-from aiogram.types import (FSInputFile, KeyboardButton, Message,
-                           ReplyKeyboardMarkup)
+from aiogram.types import FSInputFile, KeyboardButton, ReplyKeyboardMarkup
 from handlers.logic import insert_data, search_data
 
 router = Router()
@@ -47,7 +44,7 @@ async def cmd_vibir_group(message: types.Message):
     text1 = "Будьласка оберіть потрібну вам групу, або натисніть повернутися в меню"
     kb = [
         [KeyboardButton(text="РПЗ-48")],
-        [KeyboardButton(text="РПЗ-49")],
+        [KeyboardButton(text="РПЗ-49")],  # Додати нову групу
         [KeyboardButton(text="Меню")],
     ]
     keyboard = ReplyKeyboardMarkup(keyboard=kb, resize_keyboard=True)
@@ -146,9 +143,10 @@ async def cmd_rpz_48(message: types.Message):
     file_ids = []
     global login
     if login == 1:
-        image_from_pc = FSInputFile("bot/handlers/photos/photo_2024-05-28_16-52-21.jpg")
+        image_from_pc = FSInputFile("Тут встав повний шлях до фото на компьютері")
         result = await message.answer_photo(
-            image_from_pc, caption="Изображение из файла на компьютере"
+            image_from_pc,
+            caption="Изображение из файла на компьютере",  # Коментар до фото
         )
         file_ids.append(result.photo[-1].file_id)
         await message.answer("РПЗ-48")
